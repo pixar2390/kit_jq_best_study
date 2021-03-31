@@ -7,7 +7,6 @@ $(function(){
 			$('#typo').css('color','#FFFFF');
 		});
 
-
 	$('.page-main .inner').on('click', function(){
 		$('.page-main .inner').css('transform','rotate(0deg)');
 		$('.page-footer').css('background-color','#CEE777')
@@ -19,6 +18,19 @@ $(function(){
 		fontSize: '90px',
 		backgroundColor: '#ae5e9b',
 		// color: '#ebc012'
+	});
+
+	$('#typo').on('click',function() {
+		$('#typo .inner').animate({
+			top: '200px'
+			// color: '#007BFF'
+			// opacity: 0,
+			// fontSize: '0px'
+
+			},
+			1500,
+			'linear'
+		);
 	});
 });
 // テスト
