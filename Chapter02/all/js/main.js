@@ -1,14 +1,14 @@
 $(function () {
 	$('#typo')
 		.on('mouseover', function () {
-			$('#typo').animate({
+			$('#typo').stop(true).animate({
 					backgroundColor: '#ae5e9b'
 				},
 				500
 			);
 		})
 		.on('mouseout', function () {
-			$('#typo').animate({
+			$('#typo').stop(true).animate({
 					backgroundColor: '#3498db'
 				},
 				500
@@ -20,7 +20,6 @@ $(function () {
 		$('.page-footer').css('background-color', '#CEE777')
 	});
 
-	$('#typo .inner').css('transform', 'rotate(20deg)');
 	$('.page-main > div:nth-child(1) .inner').css('opacity', 0.5);
 
 	$('#typo').on('click', function () {
