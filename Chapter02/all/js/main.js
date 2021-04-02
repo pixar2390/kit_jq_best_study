@@ -1,14 +1,14 @@
 $(function () {
-	$('#typo')
+	$('header, #typo, footer')
 		.on('mouseover', function () {
-			$('#typo').stop(true).animate({
+			$(this).stop(true).animate({
 					backgroundColor: '#ae5e9b'
 				},
 				500
 			);
 		})
 		.on('mouseout', function () {
-			$('#typo').stop(true).animate({
+			$(this).stop(true).animate({
 					backgroundColor: '#3498db'
 				},
 				500
@@ -36,6 +36,17 @@ $(function () {
 			}
 		);
 	});
+
+
+	var added1 = add(1,2);
+	var added2 = add(6,7);
+	var added3 = added1 + added2;
+
+	function add(num1, num2) {
+		return num1 + num2;
+	}
+
+
 });
 // テスト
 // marge_test
