@@ -37,17 +37,19 @@ $(function () {
 		);
 	});
 
-
-	var added1 = add(1,2);
-	var added2 = add(6,7);
-	var added3 = added1 + added2;
-
-	function add(num1, num2) {
-		return num1 + num2;
-	}
-
-
 });
+
+var added1 = add(1,2);
+var added2 = add(6,7);
+var added3 = added1 + added2;
+
+function add(num1, num2) {
+	return num1 + num2;
+}
+console.log(added1);
+
+var num = 10 - 5 * 345/97;
+console.log(num);
 // テスト
 // marge_test
 // githubテスト
