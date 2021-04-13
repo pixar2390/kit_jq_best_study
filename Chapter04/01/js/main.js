@@ -15,6 +15,18 @@ $(function () {
                 color: '#ebc000'
             },duration);
         });
+     // buttons1 1行目1
+    $('#buttons1 button:nth-child(n+5):not(:nth-child(n+9))')
+        .on('mouseover',function(){
+            $(this).stop(true).animate({
+
+            },duration);
+        })
+        .on('mouseout',function(){
+            $(this).stop(ture).animate({
+
+            },duration);
+        });
 });
 
 
