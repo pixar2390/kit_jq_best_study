@@ -21,14 +21,29 @@ $(function () {
             $(this).stop(true).animate({
                 borderWidth: '1em',
                 color: '#ae5e9b'
-            },'easeOutSine');
+            },duration,'easeOutSine');
         })
         .on('mouseout',function(){
             $(this).stop(true).animate({
                 borderWidth: '0em',
                 color: '#ebc000'
-            },'easeOutSine');
+            },duration,'easeOutSine');
         });
+    // span要素でイベントを発火させようとしても幅が0なのでmouseoverに反応しない。
+    // よってボタン要素でイベントが発火するようにプログラムを書く
+    $('#buttons1 button:nth-child(n+9)')
+        .on('mouseover',function(){
+            // findメソッドを使って該当するボタンの子要素単体にCSSを適用する（クラスだけ指定してしまうと全部のクラス名が割り当てられた要素が藩王してしまう）
+            $(this).find('> span').stop(true).animate({
+                width: '100%'
+            },duration,'linear');
+        })
+        .on('mouseout',function(){
+            $(this).find('> span').stop(true).animate({
+                width: '0'
+            },duration,'linear');
+        });
+
 });
 
 
