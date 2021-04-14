@@ -15,17 +15,19 @@ $(function () {
                 color: '#ebc000'
             },duration);
         });
-     // buttons1 1行目1
-    $('#buttons1 button:nth-child(n+5):not(:nth-child(n+9))')
+     // buttons1 2行目
+    $('#buttons1 button:nth-child(n+5):nth-child(-n+8)')
         .on('mouseover',function(){
             $(this).stop(true).animate({
-
-            },duration);
+                borderWidth: '1em',
+                color: '#ae5e9b'
+            },'easeOutSine');
         })
         .on('mouseout',function(){
-            $(this).stop(ture).animate({
-
-            },duration);
+            $(this).stop(true).animate({
+                borderWidth: '0em',
+                color: '#ebc000'
+            },'easeOutSine');
         });
 });
 
