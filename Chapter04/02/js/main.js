@@ -5,11 +5,15 @@ $(function(){
 
     // images 1つめの画像
     $images.filter(':nth-child(1)')
-        .on('mouseocer', function(){
+        .on('mouseover', function(){
             $(this).find('strong, span').stop(true).animate({
                 opacity:1
             },duration)
         })
-        .on()
+        .on('mouseout',function () {
+           $(this).find('strong, span').stop(true).animate({
+            opacity:0
+           },duration);
+        });
 
 });
