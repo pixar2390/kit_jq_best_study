@@ -3,17 +3,31 @@ $(function(){
     // images-------------------------------------------------------
     var $images = $('#images p');
 
-    // images 1つめの画像
+    // images 1つ目の画像
     $images.filter(':nth-child(1)')
         .on('mouseover', function(){
             $(this).find('strong, span').stop(true).animate({
                 opacity:1
-            },duration)
+            },duration);
         })
         .on('mouseout',function () {
            $(this).find('strong, span').stop(true).animate({
             opacity:0
            },duration);
+        });
+    // images 2つ目の画像
+    $images.filter(':nth-child(2)')
+        .on('mouseover', function () {
+            $(this).find('span').stop(true).animate({
+                opacity:1
+            },duration);
+            $(this).find('strong').stop(true).animate({
+                left: '0%',
+                opacity:1
+            },duration);
+        })
+        .on('mouseout', function () {
+
         });
 
 });
