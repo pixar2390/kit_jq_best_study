@@ -36,6 +36,16 @@ $(function(){
             },duration);
         });
     // images 3つ目の画像
+    $images.filter(':nth-child(3)')
+        .on('mouseover', function () {
+            $(this).find('strong').stop(true).animate({
+                bottom: '80px',
+                opacity:1
+            },duration);
+        })
+        .on('mouseout', function() {
+
+        });
 
 
 });
