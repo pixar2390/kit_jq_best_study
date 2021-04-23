@@ -1,5 +1,5 @@
 $(function(){
-    var duration = 300;
+    var duration = 500;
     // images-------------------------------------------------------
     var $images = $('#images p');
 
@@ -39,12 +39,25 @@ $(function(){
     $images.filter(':nth-child(3)')
         .on('mouseover', function () {
             $(this).find('strong').stop(true).animate({
-                bottom: '80px',
-                opacity:1
+                bottom: '0px',
             },duration);
+            $(this).find('img').stop(true).animate({
+                top: '-20px'
+            },duration);
+            $(this).find('span').stop(true).animate({
+                opacity:1
+            }, duration * 1.3);
         })
         .on('mouseout', function() {
-
+            $(this).find('strong').stop(true).animate({
+                bottom: '-80px'
+            },duration);
+            $(this).find('img').stop(true).animate({
+                top: '0px'
+            },duration);
+            $(this).find('span').stop(true).animate({
+                opacity:0
+            }, duration * 1.3);
         });
 
 
