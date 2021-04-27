@@ -17,9 +17,9 @@ $(function () {
 			opacity: 1
 		},duration);
 	})
-	.on('mouseout' function () {
+	.on('mouseout', function () {
 		var $btn = $(this).stop(true).animate({
-			backgroundColor: '#FFFFFF'
+			backgroundColor: '#FFFFFF',
 			color: '#29333A'
 		},duration)
 		$btn.find('img:first-child').stop(true).animate({
@@ -27,6 +27,6 @@ $(function () {
 		},duration);
 		$btn.find('img:last-child').stop(true).animate({
 			opacity:0
-		})
-	})
-})
+		});
+	});
+});
