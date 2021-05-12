@@ -6,6 +6,7 @@ $(function() {
 	var $asideButton = $aside.find('button');
 	$asideButton.on('click', function(){
 		$aside.css('left', '0px')
+
 	});
 
 
