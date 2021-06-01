@@ -1,10 +1,8 @@
 $(function () {
-
   /*
 	* Slideshow
 	*/
 	$('.slideshow').each(function(){
-
 	// 変数の準備
 	// -------------------------------------------------------------------------------
 		var $container = $(this),
@@ -34,15 +32,55 @@ $(function () {
 
 	// 関数の定義
 	// -------------------------------------------------------------------------------
+		// 任意のスライドを表示する関数
+		function goToSlide(index) {
+			// スライドグループをターゲットの位置に合わせて移動
+			$slideGroup.animate({left: -100 * index + '%'},duration,easing);
+			// 現在のスライドのインデックスを上書き
+			currentIndex = index;
+			// ナビゲーションとインジケーターの状態を更新
+			updateNav();
+		}
 
+		// スライドの状態に応じてナビゲーションとインジケーターを更新する関数
+		function updateNav(){
+			var $navPerv = $nav.find('.prev'), //Prev(戻る)リンク
+				$navNext = $nav.find('.next');
+			// もし最初のスライドならprevナビゲーションを無効に
+			if (currentIndex === 0) {
+				$navPrev.addClass('disabled');
+			} else {
+				$navPrev.removeClass('disabled');
+			}
 
+			// もし最後のスライドならNextナビゲーションを無効に
+			if (currentIndex === slideCount - 1) {
+				$navNext.addClass('disabled')
+			} else {
+				$navNext.removeClass('disabled')
+			}
 
+			// 現在のスライドのインジケーターを無効に
+			$indicator.find('a').removeClass('active')
+						.eq(currentIndex).addClass('active');
+		}
 
+		// ナビゲーションのリンクがクリックされたら該当するスライドの表示
+		$nav.on('click', 'a', function(event){
+			event.preventDefault();
+			if ($(this).hasClass('prev')) {
+					goToSlide(currentIndex - 1);
+			} else {
+				goToSlide(currentIndex + 1);
+			}
+		});
 
-
-
-
+		// インジケーターのリンクがクリックされたら該当するスライドを表示
+		$indicator.on('click','a', function (event) {
+			event.preventDefault();
+			if(!$(this).hasClass('active')){
+				goToSlide($(this).index());
+			}
+		});
 	});
-
-
 });
