@@ -1,15 +1,15 @@
 $(function () {
-  /*
+   /*
 	* Slideshow
 	*/
 	$('.slideshow').each(function(){
 	// 変数の準備
 	// -------------------------------------------------------------------------------
 		var $container = $(this),
-			 $slideGroup = $container.find('.slideshow-slides'),
-			 $slides = $slideGroup.find('.slide'),
-			 $nav = $container.find('.slideshow-nav'),
-			 $indicator = $container.find('.slideshow-indicator'),
+			$slideGroup = $container.find('.slideshow-slides'),
+			$slides = $slideGroup.find('.slide'),
+			$nav = $container.find('.slideshow-nav'),
+			$indicator = $container.find('.slideshow-indicator'),
 
 			slideCount = $slides.length,
 			indicatorHTML = '',
@@ -17,7 +17,7 @@ $(function () {
 			duration = 500,
 			easing = 'easeInOutExpo'
 			interval = 7500,
-			timer = 3000;
+			timer;
 
 	// HTML要素の配置、生成、挿入
 	// -------------------------------------------------------------------------------
@@ -78,9 +78,26 @@ $(function () {
 		// インジケーターのリンクがクリックされたら該当するスライドを表示
 		$indicator.on('click','a', function (event) {
 			event.preventDefault();
+			// 'active'クラスを持たないならばgotoSlide関数を呼び出す。！は返り値を反転
 			if(!$(this).hasClass('active')){
 				goToSlide($(this).index());
 			}
 		});
+
+		// タイマーを開始する関数
+		function startTimer() {
+			// 変数intervalで設定した時間が経過することに処理を実行
+			timer = setInterval(function () {
+				// 現在のスライドのインデックス番号に応じて次に表示するスライドを決定
+				// もし最後のスライドなら最初のスライドへ
+				var nextIndex = (currentIndex + 1) % slideCount;
+				goToSlide(nextIndex)
+			}, interval);
+		}
+
+		//タイマーを停止する関数
+		function stopTimer() {
+			clearInterval(timer);
+		}
 	});
 });
