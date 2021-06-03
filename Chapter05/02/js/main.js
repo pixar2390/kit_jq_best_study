@@ -15,7 +15,7 @@ $(function () {
 			indicatorHTML = '',
 			currentIndex = 0,
 			duration = 500,
-			easing = 'easeInOutExpo'
+			easing = 'easeInOutExpo',
 			interval = 7500,
 			timer;
 
@@ -44,7 +44,7 @@ $(function () {
 
 		// スライドの状態に応じてナビゲーションとインジケーターを更新する関数
 		function updateNav(){
-			var $navPerv = $nav.find('.prev'), //Prev(戻る)リンク
+			var $navPrev = $nav.find('.prev'), //Prev(戻る)リンク
 				$navNext = $nav.find('.next');
 			// もし最初のスライドならprevナビゲーションを無効に
 			if (currentIndex === 0) {
@@ -99,5 +99,20 @@ $(function () {
 		function stopTimer() {
 			clearInterval(timer);
 		}
+
+		// マウスが乗ったらタイマーを停止、はずれたら開始
+		$container.on({
+			mouseenter: stopTimer,
+			mouseleave: startTimer
+		});
+
+	// スライドショーの開始
+	// --------------------------------------------------
+		// 最初のスライドを表示
+		goToSlide(currentIndex);
+
+		// タイマーをスタート
+		startTimer();
+
 	});
 });
