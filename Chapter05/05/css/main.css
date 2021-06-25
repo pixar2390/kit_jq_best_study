@@ -73,7 +73,7 @@ img { vertical-align: middle; }
     background-color: rgb(51, 51, 51);
     color: rgb(255, 255, 255);
 }
-.work-section .tabs-nav a.active:after {
+.work-section .tabs-nav a.active::after {
     background: url(../img/sprites.png) no-repeat 0 0;
     content: "";
     position: absolute;
