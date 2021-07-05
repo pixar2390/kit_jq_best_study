@@ -4,7 +4,7 @@ $(function(){
      */
     $('.back-to-top').each(function(){
         //htmlかbodyのいずれがスクロール可能な要素か検出
-        var el =scrollablelElement('html','body');
+        var el = scrollableElement('html','body');
 
         //ボタンにクリックイベントを設定
         $(this).on('click', function(event){
