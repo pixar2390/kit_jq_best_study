@@ -15,6 +15,7 @@ $(function(){
 
     //scrollTopが利用できる要素を検出する関数
     function scrollableElement(){
+        // console.log(arguments.length); →argumentsは引数で渡されたオブジェクトを配列形式で格納している。
         var i, len, el, $el, scrollable;
         for(i = 0, len = arguments.length; i < len; i++) {
             el = arguments[i],
