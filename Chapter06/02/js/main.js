@@ -19,8 +19,19 @@ $(function () {
 			//JSONの配列(data)の要素(item)ごとにループ処理
 			$.each(data, function(i, item) {
 				//配列の要素からHTML文字列を生成
+				var itemHTML =
+					'<li class="gallery-item is-loading">' +
+						'<a href="'+ item.images.larges + '">' +
+							'<img src="' + item.images.thumb +'" alt="' + item.title +'">' +
+						'</a>' +
+					'</li>';
 
+				//HTML文字列をDOM要素化し、配列に追加
+				elements.push($(itemHTML).get(0));
 			});
+
+			//DOMを挿入
+			$container.append(elements);
 
 		});
 
