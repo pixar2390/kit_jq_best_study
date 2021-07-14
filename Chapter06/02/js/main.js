@@ -1,39 +1,51 @@
 $(function () {
-	$('#gallery').each(function(){
-		//#gallery要素がギャラリーのコンテナーになる
-		var $container = $(this);
 
-		//オプションを指定しMasonryを準備
-		$container.masonry({
-			columnWidth:230,
-			gutter:10,
-			itemSelector:'.gllery-item'
-		});
+	/*
+	 * ギャラリー
+	 */
+	$('#gallery').each(function () {
 
-		//JSONファイルをリクエストし、成功したら関数を実行
-		$.getJSON('./data/content.json', function(data){
+		 // #gallery 要素がギャラリーのコンテナーになる
+		 var $container = $(this);
 
-			//ループで生成したDOM要素を一時的に保存する配列
-			var elements = [];
+		 // オプションを設定し Masonry を準備
+		 $container.masonry({
+			  columnWidth: 230,
+			  gutter: 10,
+			  itemSelector: '.gallery-item'
+		 });
 
-			//JSONの配列(data)の要素(item)ごとにループ処理
-			$.each(data, function(i, item) {
-				//配列の要素からHTML文字列を生成
-				var itemHTML =
-					'<li class="gallery-item is-loading">' +
-						'<a href="'+ item.images.larges + '">' +
-							'<img src="' + item.images.thumb +'" alt="' + item.title +'">' +
-						'</a>' +
-					'</li>';
+		 // JSON ファイルをリクエストし、成功したら処理を実行
+		 $.getJSON('./data/content.json', function (data) {
 
-				//HTML文字列をDOM要素化し、配列に追加
-				elements.push($(itemHTML).get(0));
-			});
+			  // ループで生成した DOM 要素を一時的に保存する配列
+			  var elements = [];
 
-			//DOMを挿入
-			$container.append(elements);
+			  // JSON の配列 (data) の要素 (item) ごとにループ処理
+			  $.each(data, function (i, item) {
 
-		});
+					// 配列の要素から HTML 文字列を生成
+					var itemHTML =
+							  '<li class="gallery-item is-loading">' +
+									'<a href="' + item.images.large + '">' +
+										 '<img src="' + item.images.thumb +
+											  '" alt="' + item.title + '">' +
+									'</a>' +
+							  '</li>';
 
+					// HTML 文字列を DOM 要素化し、配列に追加
+					elements.push($(itemHTML).get(0));
+
+			  });
+
+			  // DOM を挿入
+			  $container.append(elements);
+
+			  // 画像の読み込みが完了したら Masonry レイアウト
+			  $container.imagesLoaded(function () {
+					$(elements).removeClass('is-loading');
+					$container.masonry('appended', elements);
+			  });
+		 });
 	});
 });
