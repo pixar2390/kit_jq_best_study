@@ -28,8 +28,7 @@ $(function () {
 					var itemHTML =
 							  '<li class="gallery-item is-loading">' +
 									'<a href="' + item.images.large + '">' +
-										 '<img src="' + item.images.thumb +
-											  '" alt="' + item.title + '">' +
+										 '<img src="' + item.images.thumb + '" alt="' + item.title + '">' +
 									'</a>' +
 							  '</li>';
 
