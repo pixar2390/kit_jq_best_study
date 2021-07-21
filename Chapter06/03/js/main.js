@@ -41,7 +41,28 @@ $(function() {
 
 		//アイテムを生成しドキュメントに挿入する・・・・関数B
 		function addItems(filter) {
+			var elements = [],
+				//追加するデータの配列
+				slicedData = filteredData.slice(added, added + addItemCount);
 
+			//sliceDataの要素ごとにDOM要素を生成
+			$.each(sliceData, function(i, item) {
+				var itemHTML =
+					'<li class="gallery-item is-loading">' +
+						'<a href="' + item.images.large + '">' +
+							'<img scr="'+ item.images.thumb + '" alt="">' +
+							'<span class="caption">' +
+								'<span class="inner">' +
+									'<b class="title">' + item.title + '</b>' +
+										'<time class="date" datatime="' + item.date + '">' +
+											item.date.replace(/0-0?/g, '/') +
+										'</time>' +
+								'</span>' +
+							'</span>' +
+						'</a>' +
+					'</li>';
+				elements.push($(itemHTML).get(0));
+			});
 		}
 
 		//アイテムをフィルタリングする・・・・・関数C
