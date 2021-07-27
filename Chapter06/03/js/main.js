@@ -46,7 +46,7 @@ $(function() {
 				slicedData = filteredData.slice(added, added + addItemCount);
 
 			//sliceDataの要素ごとにDOM要素を生成
-			$.each(sliceData, function(i, item) {
+			$.each(slicedData, function(i, item) {
 				var itemHTML =
 					'<li class="gallery-item is-loading">' +
 						'<a href="' + item.images.large + '">' +
@@ -55,7 +55,7 @@ $(function() {
 								'<span class="inner">' +
 									'<b class="title">' + item.title + '</b>' +
 										'<time class="date" datatime="' + item.date + '">' +
-											item.date.replace(/0-0?/g, '/') +
+											item.date.replace(/-0?/g, '/') +
 										'</time>' +
 								'</span>' +
 							'</span>' +
@@ -63,6 +63,30 @@ $(function() {
 					'</li>';
 				elements.push($(itemHTML).get(0));
 			});
+
+			//DOM要素の配列をコンテナーに挿入し、Masonryレイアウトを実行
+			$container
+				.append(elements)
+				.imagesLoaded(function() {
+					$(elements).removeClass('is-loading');
+					$container.masonry('appended', elements);
+					//フィルタリング時は再配置
+					if(filter){
+						$container.masonry();
+					}
+				});
+
+			//JSONデータが全て追加しオワタいたら追加ボタンを消す
+			added += slicedData.length;
+
+			//JSONデータがすべて追加し終わっていたら追加ボタンを消す。
+			// console.log(added);
+			// console.log(filteredData.length);
+			if (added < filteredData.length) {
+				$loadMoreButton.show();
+			} else {
+				$loadMoreButton.hide();
+			}
 		}
 
 		//アイテムをフィルタリングする・・・・・関数C
