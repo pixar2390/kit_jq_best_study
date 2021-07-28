@@ -92,6 +92,25 @@ $(function() {
 		//アイテムをフィルタリングする・・・・・関数C
 		function filterItems() {
 
+			var key = $(this).val(),	//チェックされたラジオボタンのvalue
+				 masonryItems = $container.masonry('getItemElements'); 	//追加済みのMasonryアイテム
+
+			//Masonryアイテムを削除
+			$container.masonry('remove', masonryItems);
+
+			//フィルタリング済みアイテムのデータリセットと追加済みアイテム数をリセット
+			filteredData = [];
+			added = 0;
+
+			if (key === 'all') {
+				//allがチェックされた場合、全てのJSONデータを格納
+				filteredData = allData;
+			} else {
+
+			}
+
 		}
 	});
 });
+
+// リンク先設定："C:\Program Files\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
