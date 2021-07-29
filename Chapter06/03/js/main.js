@@ -1,19 +1,21 @@
-$(function() {
+$(function () {
+
 	/*
 	 * ギャラリー
 	 */
-	$('#gallery').each(function(){
+	$('#gallery').each(function () {
+
 		var $container = $(this),
-			 $loadMoreButton = $('#load-more'),   //追加ボタン
-			 $filter = $('#gallery-filter'),      //フィルタリングのフォーム
-			 addItemCount =16,                    //一度に表示するアイテム数
-			 added = 0,                           //表示済みのアイテム数
-			 allData =[],                         //すべてのJSONデータ
-			 filteredData = [];						  // フィルタリングされたJSONデータ
+			$loadMoreButton = $('#load-more'), //追加ボタン
+			$filter = $('#gallery-filter'), //フィルタリングのフォーム
+			addItemCount = 16, //一度に表示するアイテム数
+			added = 0, //表示済みのアイテム数
+			allData = [], //すべてのJSONデータ
+			filteredData = []; // フィルタリングされたJSONデータ
 
 		$container.masonry({
 			columnWidth: 230,
-			gutter:10,
+			gutter: 10,
 			itemSelector: '.gallery-item'
 		});
 
@@ -21,7 +23,7 @@ $(function() {
 		$.getJSON('./data/content.json', initGallery);
 
 		//ギャラリーを初期化する・・・・・・関数A
-		function initGallery (data) {
+		function initGallery(data) {
 
 			//取得したJSONデータを格納
 			allData = data;
@@ -46,37 +48,37 @@ $(function() {
 				slicedData = filteredData.slice(added, added + addItemCount);
 
 			//sliceDataの要素ごとにDOM要素を生成
-			$.each(slicedData, function(i, item) {
+			$.each(slicedData, function (i, item) {
 				var itemHTML =
-					'<li class="gallery-item is-loading">' +
-						'<a href="' + item.images.large + '">' +
-							'<img scr="'+ item.images.thumb + '" alt="">' +
-							'<span class="caption">' +
-								'<span class="inner">' +
-									'<b class="title">' + item.title + '</b>' +
-										'<time class="date" datatime="' + item.date + '">' +
-											item.date.replace(/-0?/g, '/') +
-										'</time>' +
+						'<li class="gallery-item is-loading">' +
+							'<a href="' + item.images.large + '">' +
+								'<img src="' + item.images.thumb + '" alt="">' +
+								'<span class="caption">' +
+									'<span class="inner">' +
+										'<b class="title">' + item.title + '</b>' +
+											'<time class="date" datatime="' + item.date + '">' +
+												item.date.replace(/-0?/g, '/') +
+											'</time>' +
+									'</span>' +
 								'</span>' +
-							'</span>' +
-						'</a>' +
-					'</li>';
-				elements.push($(itemHTML).get(0));
+							'</a>' +
+						'</li>';
+					elements.push($(itemHTML).get(0));
 			});
 
 			//DOM要素の配列をコンテナーに挿入し、Masonryレイアウトを実行
 			$container
 				.append(elements)
-				.imagesLoaded(function() {
+				.imagesLoaded(function () {
 					$(elements).removeClass('is-loading');
 					$container.masonry('appended', elements);
 					//フィルタリング時は再配置
-					if(filter){
+					if (filter) {
 						$container.masonry();
 					}
 				});
 
-			//JSONデータが全て追加しオワタいたら追加ボタンを消す
+			//追加済みのアイテム数を更新
 			added += slicedData.length;
 
 			//JSONデータがすべて追加し終わっていたら追加ボタンを消す。
@@ -92,8 +94,8 @@ $(function() {
 		//アイテムをフィルタリングする・・・・・関数C
 		function filterItems() {
 
-			var key = $(this).val(),	//チェックされたラジオボタンのvalue
-				 masonryItems = $container.masonry('getItemElements'); 	//追加済みのMasonryアイテム
+			var key = $(this).val(), //チェックされたラジオボタンのvalue
+				masonryItems = $container.masonry('getItemElements'); //追加済みのMasonryアイテム
 
 			//Masonryアイテムを削除
 			$container.masonry('remove', masonryItems);
@@ -106,9 +108,14 @@ $(function() {
 				//allがチェックされた場合、全てのJSONデータを格納
 				filteredData = allData;
 			} else {
-
+				//all以外の場合、キーと一致するデータを抽出
+				filteredData = $.grep(allData, function (item) {
+					return item.category === key;
+				});
 			}
 
+			//アイテムを追加
+			addItems(true);
 		}
 	});
 });
