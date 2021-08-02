@@ -117,6 +117,18 @@ $(function () {
 			//アイテムを追加
 			addItems(true);
 		}
+
+		//ラジオボタンをカスタマイズ
+		$(document).ready(function() {
+			$('.filter-form input[type="radio"]').button({
+				icons:{
+					primary:'icon-radio'
+				}
+			});
+
+
+		});
+
 	});
 });
 
