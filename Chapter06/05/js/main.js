@@ -39,6 +39,9 @@ $(function () {
 
 			//フィルターのラジオボタンが変更されたらフィルタリングを実行
 			$filter.on('change', 'input[type="radio"]', filterItems);
+
+			//アイテムのリンクにホバーエフェクト処理を登録
+			$container.on('mouseenter mouseleave', 'gallery-item a', hoverDirection);
 		}
 
 		//アイテムを生成しドキュメントに挿入する・・・・関数B
@@ -129,7 +132,17 @@ $(function () {
 
 		//ホバーエフェクト
 		function hoverDirection(event) {
+			var $overlay = $(this).find('.caption'),
+				 side = getMouseDirection(event),
+				 animateTo,
+				 positionIn = {
+					 top: '0%',
+					 left: '0%'
+				 },
+				 positionOut = (function () {
 
+
+				 })();
 		};
 
 		//ラジオボタンをカスタマイズ
@@ -139,8 +152,6 @@ $(function () {
 					primary:'icon-radio'
 				}
 			});
-
-
 		});
 
 	});
