@@ -139,10 +139,27 @@ $(function () {
 					 top: '0%',
 					 left: '0%'
 				 },
+				//  以下は無名関数の記述方法
 				 positionOut = (function () {
-
-
+					switch(side) {
+						//case0:top,case1:right,case2:bottom,default:left
+						case 0 : return{top:'-100%', left:'0%'};
+									break;
+						case 1: return{top:'0%', left:'100%'};
+								  break;
+						case 2: return{top:'1000%', left:'0%'};
+								  break;
+						default: return{top:'0%', left:'100%'};
+									break;
+					}
 				 })();
+			if (event.type === 'mouseenter') {
+				animateTo = positionIn;
+				$overlay.css(positionOut);
+			} else {
+				animateTo = positionOut
+			}
+			$overlay.scrollTop.animateTo(animateTo, 250, 'easeOutExpo');
 		};
 
 		//ラジオボタンをカスタマイズ
