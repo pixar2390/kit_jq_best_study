@@ -83,11 +83,11 @@ $(function () {
 
             //リンクにColorboxを設定
             $container.find('a').colorbox({
-                maxWidth:'970px',
-                maxHeight:'95%',
-                title:function(){
-                    return $(this).find('.inner').html();
-                }
+               maxWidth:'970px',
+               maxHeight:'95%',
+               title:function(){
+						return $(this).find('.inner').html();
+               }
             });
 
 			//追加済みのアイテム数を更新
@@ -133,26 +133,26 @@ $(function () {
 		//ホバーエフェクト
 		function hoverDirection(event) {
 			var $overlay = $(this).find('.caption'),
-				 side = getMouseDirection(event),
-				 animateTo,
-				 positionIn = {
-					 top: '0%',
-					 left: '0%'
-				 },
-				//  以下は無名関数の記述方法
-				 positionOut = (function () {
+					side = getMouseDirection(event),
+					animateTo,
+					positionIn = {
+						top: '0%',
+						left: '0%'
+					},
+				//  以下は即時関数
+				positionOut = (function () {
 					switch(side) {
 						//case0:top,case1:right,case2:bottom,default:left
-						case 0 : return{top:'-100%', left:'0%'};
+						case 0:  return{top:'-100%', left:'0%'};
 									break;
-						case 1: return{top:'0%', left:'100%'};
-								  break;
-						case 2: return{top:'1000%', left:'0%'};
-								  break;
+						case 1:  return{top:'0%', left:'100%'};
+									break;
+						case 2:  return{top:'1000%', left:'0%'};
+									break;
 						default: return{top:'0%', left:'100%'};
 									break;
 					}
-				 })();
+				})();
 			if (event.type === 'mouseenter') {
 				animateTo = positionIn;
 				$overlay.css(positionOut);
@@ -176,34 +176,35 @@ $(function () {
 		// スクロール位置によってヘッダーサイズを変更
 		$('.page-header').each(function () {
 			var $header = $(this),
-				 headerHeight = $header.outerHeight(),
-				 headerPaddingTop = parseInt($header.css('paddingTop'), 10),
-				 headerPaddingBottom = parseInt($header.css('paddingBottom'), 10);
+				headerHeight = $header.outerHeight(),
+				headerPaddingTop = parseInt($header.css('paddingTop'), 10),
+				headerPaddingBottom = parseInt($header.css('paddingBottom'), 10);
 			$(window).on('scroll', $.throttle(1000 / 60, function () {
-				 var scroll = $(this).scrollTop(),
-					  styles = {};
-				 if (scroll > 0) {
-					  if (scroll < headerHeight) {
-							styles = {
-								 paddingTop: headerPaddingTop - scroll / 2,
-								 paddingBottom: headerPaddingBottom - scroll / 2
+				var scroll = $(this).scrollTop(),
+					styles = {};
+				if (scroll > 0) {
+					if (scroll < headerHeight) {
+						styles = {
+							paddingTop: headerPaddingTop - scroll / 2,
+							paddingBottom: headerPaddingBottom - scroll / 2
 							};
-					  } else {
+					} else {
 							styles = {
-								 paddingTop: 0,
-								 paddingBottom: 0
+								paddingTop: 0,
+								paddingBottom: 0
 							};
-					  }
-				 } else {
-					  styles = {
-							paddingTop: '',
-							paddingBottom: ''
-					  }
-				 }
-				 $header.css(styles);
+					}
+				} else {
+					styles = {
+						paddingTop: '',
+						paddingBottom: ''
+					};
+				}
+				$header.css(styles);
 			}));
-	  });
+		});
 
 });
 
 // リンク先設定："C:\Program Files\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+// https://stackoverflow.com/questions/3627042/jquery-animation-for-a-hover-with-mouse-direction/3647634#3647634
